@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Reader</title>
+    </head>
+    <body>
+		<img id="book" src="img/RMEOJLET-1-2_01.png" width="100%" height="100%" />
+		<script type="text/javascript">
+			function increment(){
+				var end = 22;
+				var str = document.getElementById("book").src;
+				var index = parseInt(str.splice(-6,-4));
+				if (index < end-1){
+					index++;
+				}
+				var output = str.substr(0,str.length-6);
+				if (index < 10){
+					output+="0"
+				}
+				output+=index+".png";
+				
+			}
+			
+			function decrement(){
+				var begin = 0;
+				var str = document.getElementById("book").src;
+				var index = parseInt(str.splice(-6,-4));
+				if (index > begin-1){
+					index--;
+				}
+				var output = str.substr(0,str.length-6);
+				if (index < 10){
+					output+="0"
+				}
+				output+=index+".png";
+				
+			}
+			
+		function onSuccess(acceleration) {
+    	if (acceleration.x > 0.2)
+			increment();
+		else if(acceleration.x < -0.2)
+			decrement;
+};
+
+function onError() {
+    alert('onError!');
+};
+
+var options = { frequency: 3000 };  // Update every 3 seconds
+
+var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+			
+			</script>
+        <script type="text/javascript" src="cordova.js"></script>
+    </body>
+</html>
